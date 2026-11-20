@@ -1,6 +1,6 @@
 # Kaysan Rafi Akbar - Portfolio (Astro + Tailwind CSS)
 
-A Persona 5-inspired portfolio website built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
+A Persona 5 UI-inspired portfolio website built with [Astro](https://astro.build/) and [Tailwind CSS](https://tailwindcss.com/).
 
 ## ✨ Features
 
