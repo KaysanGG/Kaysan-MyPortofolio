@@ -2,8 +2,12 @@
 import { Image } from 'astro:assets';
 import sifestImage from '../assets/images/sifest.jpg';
 ---
-<section id="projects" class="py-24 relative bg-black halftone-bg border-b-8 border-p5red">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<section id="projects" class="py-24 relative bg-black halftone-bg border-b-8 border-p5red overflow-hidden">
+    <!-- Background manga star accents -->
+    <div class="absolute -left-10 bottom-12 text-p5red/15 text-8xl font-anton select-none pointer-events-none p5-star-spin" style="animation-duration: 28s;">★</div>
+    <div class="absolute right-8 top-16 text-white/5 text-9xl font-anton select-none pointer-events-none p5-float-star">★</div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <!-- Section Header -->
         <div class="flex items-center gap-4 mb-16 p5-reveal-slash">
             <div class="bg-p5red text-white font-anton text-3xl px-6 py-2 skew-box shadow-[4px_4px_0px_#FFF]">
@@ -12,7 +16,7 @@ import sifestImage from '../assets/images/sifest.jpg';
             <h2 class="font-anton text-4xl sm:text-6xl tracking-wider uppercase">Projects & Works</h2>
         </div>
 
-        <article>
+        <article class="p5-reveal-card">
             <header class="mb-8">
                 <h3 class="font-anton text-4xl sm:text-5xl uppercase tracking-wide text-white">SI FEST 2026</h3>
                 <p class="mt-2 text-base sm:text-lg text-p5lightgray">A website of Festival Information System</p>
@@ -21,17 +25,17 @@ import sifestImage from '../assets/images/sifest.jpg';
 
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
                 <div class="lg:col-span-6 px-6 sm:px-8 lg:px-0">
-                    <div class="relative">
-                        <div class="skew-box border-4 border-white bg-black shadow-[6px_6px_0px_#E60012] overflow-hidden">
+                    <div class="relative group">
+                        <div class="skew-box border-4 border-white bg-black shadow-[6px_6px_0px_#E60012] group-hover:shadow-[10px_10px_0px_#E60012] group-hover:-translate-y-1 overflow-hidden transition-all duration-300">
                             <Image 
                                 src={sifestImage} 
                                 alt="SI FEST 2026 website preview"
                                 width={800}
                                 height={450}
-                                class="w-full h-auto object-cover"
+                                class="w-full h-auto object-cover group-hover:scale-105 transition-transform duration-500"
                             />
                         </div>
-                        <div class="absolute -top-4 left-5 ransom-box pointer-events-none px-3 py-1 text-sm">★ PROJECT 01</div>
+                        <div class="absolute -top-4 left-5 ransom-box pointer-events-none px-3 py-1 text-sm shadow-[4px_4px_0px_#000]">★ PROJECT 01</div>
                     </div>
                 </div>
 
@@ -44,15 +48,17 @@ import sifestImage from '../assets/images/sifest.jpg';
                     </p>
 
                     <div class="flex flex-wrap gap-2">
-                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1"><span class="unskew inline-block">REACT</span></span>
-                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1"><span class="unskew inline-block">LARAVEL</span></span>
-                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1"><span class="unskew inline-block">MYSQL</span></span>
-                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1"><span class="unskew inline-block">TAILWIND CSS</span></span>
+                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1 hover:border-white transition-colors"><span class="unskew inline-block">REACT</span></span>
+                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1 hover:border-white transition-colors"><span class="unskew inline-block">LARAVEL</span></span>
+                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1 hover:border-white transition-colors"><span class="unskew inline-block">MYSQL</span></span>
+                        <span class="skew-box border-2 border-p5red bg-p5dark text-white font-mono text-xs sm:text-sm font-bold uppercase tracking-wider px-3 py-1 hover:border-white transition-colors"><span class="unskew inline-block">TAILWIND CSS</span></span>
                     </div>
 
-                    <a href="https://sifestunsri.com/" target="_blank" rel="noopener noreferrer" class="skew-box inline-flex bg-p5red hover:bg-white hover:text-p5dark text-white font-anton text-lg px-5 py-3 border-2 border-white shadow-[4px_4px_0px_#FFF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/60">
-                        <span class="unskew inline-flex items-center gap-2">sifestunsri.com <span aria-hidden="true">↗</span></span>
-                    </a>
+                    <div class="pt-2">
+                        <a href="https://sifestunsri.com/" target="_blank" rel="noopener noreferrer" class="skew-box p5-btn-action inline-flex bg-p5red text-white font-anton text-lg px-6 py-3 border-2 border-white shadow-[4px_4px_0px_#FFF] focus:outline-none focus-visible:ring-4 focus-visible:ring-white/60">
+                            <span class="unskew inline-flex items-center gap-2">sifestunsri.com <span aria-hidden="true">↗</span></span>
+                        </a>
+                    </div>
                 </div>
             </div>
         </article>

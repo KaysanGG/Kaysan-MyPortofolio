@@ -8,6 +8,13 @@ import profileImage from '../assets/images/profile.jpg';
         <div class="w-full h-full bg-gradient-to-tr from-p5red via-transparent to-transparent transform -skew-y-12"></div>
     </div>
 
+    <!-- Animated Floating Manga Stars Background -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden select-none" aria-hidden="true">
+        <div class="absolute top-10 left-[8%] text-p5red/20 text-6xl font-anton p5-star-spin">★</div>
+        <div class="absolute bottom-16 left-[42%] text-white/10 text-4xl font-anton p5-float-star">★</div>
+        <div class="absolute top-24 right-[12%] text-p5red/25 text-5xl font-anton p5-star-spin" style="animation-duration: 25s; animation-direction: reverse;">★</div>
+    </div>
+
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
             <!-- Left Text Content -->
@@ -18,7 +25,7 @@ import profileImage from '../assets/images/profile.jpg';
                 </div>
 
                 <!-- Dynamic Typewriter Role Ticker -->
-                <div class="font-mono text-sm sm:text-base font-bold tracking-widest text-white bg-p5gray/90 border-l-4 border-p5red px-4 py-2 inline-block shadow-[4px_4px_0px_#000] hero-slam delay-1">
+                <div class="font-mono text-sm sm:text-base font-bold tracking-widest text-white bg-p5gray/90 border-l-4 border-p5red px-4 py-2 inline-block shadow-[4px_4px_0px_#000] hero-slam delay-2">
                     <span class="text-p5red mr-2">&gt;&gt;</span><span id="role-typewriter">NARRATIVE DESIGNER</span><span class="p5-cursor"></span>
                 </div>
 
@@ -36,8 +43,8 @@ import profileImage from '../assets/images/profile.jpg';
                 </p>
 
                 <!-- CTA Buttons -->
-                <div class="flex flex-wrap gap-4 pt-2">
-                    <a href="#projects" class="skew-box bg-p5red text-white font-anton text-lg px-6 py-3 border-4 border-white hover:bg-white hover:text-p5dark transition-all shadow-[4px_4px_0px_#FFF] flex items-center gap-3">
+                <div class="flex flex-wrap gap-4 pt-2 hero-slam delay-5">
+                    <a href="#projects" class="skew-box p5-btn-action bg-p5red text-white font-anton text-lg px-6 py-3 border-4 border-white transition-all shadow-[4px_4px_0px_#FFF] flex items-center gap-3">
                         <span class="unskew flex items-center gap-2">
                             <i class="fa-solid fa-gamepad"></i> EXPLORE WORKS
                         </span>
@@ -45,15 +52,15 @@ import profileImage from '../assets/images/profile.jpg';
                 </div>
             </div>
 
-            <!-- Right Visual / Persona Profile Photo Frame -->
-            <div class="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0">
-                <div class="relative w-full max-w-xs sm:max-w-sm">
+            <!-- Right Visual / Persona Profile Photo Frame with Interactive 3D Tilt -->
+            <div class="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0 hero-slam delay-3">
+                <div id="hero-profile-container" class="relative w-full max-w-xs sm:max-w-sm transition-transform duration-300 ease-out" style="perspective: 1000px;">
                     <!-- Dynamic Star & Red Slash Backdrop Accent -->
-                    <div class="absolute -inset-4 bg-p5red transform rotate-6 skew-x-6 border-4 border-white shadow-[12px_12px_0px_#000] pointer-events-none"></div>
-                    <div class="absolute -top-8 -left-8 text-p5red/30 text-8xl font-anton select-none pointer-events-none transform -rotate-12">★</div>
+                    <div id="hero-star-bg" class="absolute -inset-4 bg-p5red transform rotate-6 skew-x-6 border-4 border-white shadow-[12px_12px_0px_#000] pointer-events-none transition-transform duration-200"></div>
+                    <div class="absolute -top-8 -left-8 text-p5red/30 text-8xl font-anton select-none pointer-events-none transform -rotate-12 p5-float-star">★</div>
                     
                     <!-- Main Slanted Profile Frame -->
-                    <div class="relative bg-p5dark border-4 border-white p-5 transform -rotate-2 skew-x-2 shadow-[10px_10px_0px_#E60012] group">
+                    <div id="hero-profile-card" class="relative bg-p5dark border-4 border-white p-5 transform -rotate-2 skew-x-2 shadow-[10px_10px_0px_#E60012] group transition-all duration-300">
                         <!-- Top Status Bar -->
                         <div class="flex justify-between items-center border-b-2 border-white pb-2.5 mb-4">
                             <span class="font-anton text-lg tracking-widest text-p5red flex items-center gap-2">
@@ -79,7 +86,7 @@ import profileImage from '../assets/images/profile.jpg';
                             <div class="absolute inset-0 bg-gradient-to-t from-p5dark via-transparent to-transparent opacity-80 pointer-events-none"></div>
                         </div>
 
-                        <div class="absolute -bottom-4 -right-3 ransom-box pointer-events-none px-3.5 py-1 text-sm shadow-[4px_4px_0px_#000]">
+                        <div class="absolute -bottom-4 -right-3 ransom-box p5-take-your-time pointer-events-none px-3.5 py-1 text-sm shadow-[4px_4px_0px_#000]">
                             ★ TAKE YOUR TIME!
                         </div>
                     </div>
@@ -136,6 +143,34 @@ import profileImage from '../assets/images/profile.jpg';
                 isDeleting = true;
                 typeRoleLoop();
             }, 2200);
+
+            // Interactive 3D tilt tracking for Hero Card
+            const heroSection = document.getElementById('hero');
+            const profileCard = document.getElementById('hero-profile-card');
+            const starBg = document.getElementById('hero-star-bg');
+
+            if (heroSection && profileCard) {
+                heroSection.addEventListener('mousemove', (e) => {
+                    const rect = heroSection.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+                    
+                    const rotateX = (-y / rect.height) * 14;
+                    const rotateY = (x / rect.width) * 18;
+
+                    profileCard.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotate(-2deg) skewX(2deg) scale(1.02)`;
+                    if (starBg) {
+                        starBg.style.transform = `rotate(6deg) skewX(6deg) translate(${rotateY * 0.4}px, ${-rotateX * 0.4}px)`;
+                    }
+                });
+
+                heroSection.addEventListener('mouseleave', () => {
+                    profileCard.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) rotate(-2deg) skewX(2deg) scale(1)';
+                    if (starBg) {
+                        starBg.style.transform = 'rotate(6deg) skewX(6deg) translate(0px, 0px)';
+                    }
+                });
+            }
         }
     });
 </script>

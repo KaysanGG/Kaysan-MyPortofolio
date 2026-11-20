@@ -136,6 +136,61 @@
   50%, 100% { opacity: 0; }
 }
 
+@keyframes p5CutIn {
+  0% {
+    opacity: 0;
+    transform: translateX(30px) skewX(-10deg) scale(0.96);
+    filter: brightness(2) contrast(1.2);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-5px) skewX(3deg) scale(1.01);
+    filter: brightness(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0) skewX(0deg) scale(1);
+    filter: none;
+  }
+}
+
+@keyframes p5TakeYourTime {
+  0%, 100% { transform: rotate(-2deg) scale(1); }
+  25% { transform: rotate(1deg) scale(1.05); }
+  50% { transform: rotate(-3deg) scale(0.97); }
+  75% { transform: rotate(2deg) scale(1.04); }
+}
+
+@keyframes p5StarSpin {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.15); opacity: 0.6; }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+@keyframes p5HeartBeat {
+  0%, 100% { transform: scale(1); }
+  14% { transform: scale(1.3); }
+  28% { transform: scale(1); }
+  42% { transform: scale(1.18); }
+  70% { transform: scale(1); }
+}
+
+@keyframes p5NodePulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(230, 0, 18, 0.7);
+    transform: rotate(45deg) scale(1);
+  }
+  50% {
+    box-shadow: 0 0 0 10px rgba(230, 0, 18, 0);
+    transform: rotate(45deg) scale(1.12);
+  }
+}
+
+@keyframes p5Float {
+  0%, 100% { transform: translateY(0px) rotate(-12deg); }
+  50% { transform: translateY(-8px) rotate(-8deg); }
+}
+
 .hero-slam {
   opacity: 0;
   display: inline-block;
@@ -145,11 +200,40 @@
 .delay-2 { animation-delay: 0.25s; }
 .delay-3 { animation-delay: 0.4s; }
 .delay-4 { animation-delay: 0.55s; }
+.delay-5 { animation-delay: 0.7s; }
 
 .p5-stamp-word {
   display: inline-block;
   animation: p5PulseStamp 3s infinite ease-in-out;
   transition: transform 0.15s ease;
+}
+
+.p5-take-your-time {
+  animation: p5TakeYourTime 3.5s infinite ease-in-out;
+  transform-origin: center center;
+}
+
+.p5-star-spin {
+  animation: p5StarSpin 18s infinite linear;
+  transform-origin: center center;
+}
+
+.p5-heart-beat {
+  animation: p5HeartBeat 2.2s infinite ease-in-out;
+  display: inline-block;
+  transform-origin: center center;
+}
+
+.p5-float-star {
+  animation: p5Float 4s infinite ease-in-out;
+}
+
+.p5-node-pulse {
+  animation: p5NodePulse 2.5s infinite cubic-bezier(0.4, 0, 0.6, 1);
+}
+
+.p5-cut-in {
+  animation: p5CutIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
 }
 
 .p5-cursor {
@@ -162,10 +246,11 @@
   animation: p5BlinkCursor 0.8s infinite;
 }
 
+/* Scroll reveal classes */
 .p5-reveal-slash {
   opacity: 0;
   transform: translateX(-45px) skewX(-14deg);
-  transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 }
 .p5-reveal-slash.is-visible {
   opacity: 1;
@@ -180,6 +265,103 @@
 .p5-reveal-pop.is-visible {
   opacity: 1;
   transform: scale(1) rotate(-2deg) translateY(0);
+}
+
+.p5-reveal-card {
+  opacity: 0;
+  transform: translateY(35px) skewX(-2deg);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.p5-reveal-card.is-visible {
+  opacity: 1;
+  transform: translateY(0) skewX(0deg);
+}
+
+.p5-reveal-left {
+  opacity: 0;
+  transform: translateX(-60px) skewX(-8deg);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.p5-reveal-left.is-visible {
+  opacity: 1;
+  transform: translateX(0) skewX(0deg);
+}
+
+.p5-reveal-right {
+  opacity: 0;
+  transform: translateX(60px) skewX(8deg);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.p5-reveal-right.is-visible {
+  opacity: 1;
+  transform: translateX(0) skewX(0deg);
+}
+
+/* Button & Card Persona Hover FX (Strictly Persona 5 Red, White, Black) */
+.p5-btn-action {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, color 0.25s ease;
+}
+.p5-btn-action::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: #FFFFFF;
+  transform: skewX(-20deg);
+  transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+.p5-btn-action:hover::before {
+  left: 0;
+}
+.p5-btn-action:hover {
+  color: #0A0A0A !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 6px 6px 0px #FFFFFF !important;
+  border-color: #E60012 !important;
+}
+
+/* For white buttons (like Hire Me in navbar) sweeping to red on hover */
+.p5-btn-action-white {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.25s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.25s ease, color 0.25s ease;
+}
+.p5-btn-action-white::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 120%;
+  height: 100%;
+  background: #E60012;
+  transform: skewX(-20deg);
+  transition: left 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+.p5-btn-action-white:hover::before {
+  left: 0;
+}
+.p5-btn-action-white:hover {
+  color: #FFFFFF !important;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 6px 6px 0px #FFFFFF !important;
+  border-color: #FFFFFF !important;
+}
+
+.p5-card-interactive {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease;
+}
+.p5-card-interactive:hover {
+  transform: translateY(-6px) rotate(-1deg);
+  box-shadow: 12px 12px 0px #E60012;
+  border-color: #E60012;
 }
 
 .nav-p5-link, .skill-tab {
@@ -200,7 +382,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-slam, .p5-stamp-word, .p5-cursor, .p5-reveal-slash, .p5-reveal-pop, #menu-panel.is-open {
+  .hero-slam, .p5-stamp-word, .p5-cursor, .p5-reveal-slash, .p5-reveal-pop, .p5-reveal-card, .p5-reveal-left, .p5-reveal-right, #menu-panel.is-open, .p5-take-your-time, .p5-star-spin, .p5-heart-beat, .p5-float-star, .p5-node-pulse, .p5-cut-in {
     animation: none !important;
     transition: none !important;
     opacity: 1 !important;

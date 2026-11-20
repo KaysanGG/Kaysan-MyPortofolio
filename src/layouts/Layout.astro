@@ -40,7 +40,9 @@ const {
       // Global reveal animations observer
       document.addEventListener('DOMContentLoaded', () => {
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        const revealElements = document.querySelectorAll('.p5-reveal-slash, .p5-reveal-pop');
+        const revealElements = document.querySelectorAll(
+          '.p5-reveal-slash, .p5-reveal-pop, .p5-reveal-card, .p5-reveal-left, .p5-reveal-right'
+        );
         
         if ('IntersectionObserver' in window && !prefersReducedMotion) {
           const revealObserver = new IntersectionObserver((entries, observer) => {
@@ -51,8 +53,8 @@ const {
               }
             });
           }, {
-            threshold: 0.15,
-            rootMargin: '0px 0px -40px 0px'
+            threshold: 0.12,
+            rootMargin: '0px 0px -30px 0px'
           });
 
           revealElements.forEach(el => revealObserver.observe(el));
