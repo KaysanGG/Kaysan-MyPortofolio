@@ -1,0 +1,141 @@
+---
+import { Image } from 'astro:assets';
+import profileImage from '../assets/images/profile.jpg';
+---
+<section id="hero" class="relative lg:min-h-[70vh] py-10 flex items-center halftone-bg overflow-hidden border-b-8 border-p5red">
+    <!-- Background diagonal red slash accent -->
+    <div class="absolute inset-0 opacity-10 pointer-events-none">
+        <div class="w-full h-full bg-gradient-to-tr from-p5red via-transparent to-transparent transform -skew-y-12"></div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+            <!-- Left Text Content -->
+            <div class="lg:col-span-7 space-y-6">
+                <!-- Ransom Note Tag -->
+                <div class="inline-block ransom-box pointer-events-none px-4 py-1 text-lg mb-2 hero-slam delay-1">
+                    ★ information system - Universitas Sriwijaya
+                </div>
+
+                <!-- Dynamic Typewriter Role Ticker -->
+                <div class="font-mono text-sm sm:text-base font-bold tracking-widest text-white bg-p5gray/90 border-l-4 border-p5red px-4 py-2 inline-block shadow-[4px_4px_0px_#000] hero-slam delay-1">
+                    <span class="text-p5red mr-2">&gt;&gt;</span><span id="role-typewriter">NARRATIVE DESIGNER</span><span class="p5-cursor"></span>
+                </div>
+
+                <h1 id="hero-headline" class="font-anton text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-[1.08] uppercase p5-heading select-none py-2">
+                    <span class="block">
+                        <span class="hero-slam delay-1 text-white">KAYSAN RAFI</span>
+                    </span>
+                    <span class="block">
+                        <span class="hero-slam delay-3 text-white underline decoration-p5red decoration-4 underline-offset-8">AKBAR</span>
+                    </span>
+                </h1>
+
+                <p class="text-base sm:text-lg text-p5lightgray font-medium max-w-2xl border-l-4 border-p5red pl-4 hero-slam delay-4">
+                    Crafting high-contrast visual identities, deep-dive objective analysis, and Offering imagination to the world. Ready to hijack your audience's attention.
+                </p>
+
+                <!-- CTA Buttons -->
+                <div class="flex flex-wrap gap-4 pt-2">
+                    <a href="#projects" class="skew-box bg-p5red text-white font-anton text-lg px-6 py-3 border-4 border-white hover:bg-white hover:text-p5dark transition-all shadow-[4px_4px_0px_#FFF] flex items-center gap-3">
+                        <span class="unskew flex items-center gap-2">
+                            <i class="fa-solid fa-gamepad"></i> EXPLORE WORKS
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Right Visual / Persona Profile Photo Frame -->
+            <div class="lg:col-span-5 relative flex justify-center mt-8 lg:mt-0">
+                <div class="relative w-full max-w-xs sm:max-w-sm">
+                    <!-- Dynamic Star & Red Slash Backdrop Accent -->
+                    <div class="absolute -inset-4 bg-p5red transform rotate-6 skew-x-6 border-4 border-white shadow-[12px_12px_0px_#000] pointer-events-none"></div>
+                    <div class="absolute -top-8 -left-8 text-p5red/30 text-8xl font-anton select-none pointer-events-none transform -rotate-12">★</div>
+                    
+                    <!-- Main Slanted Profile Frame -->
+                    <div class="relative bg-p5dark border-4 border-white p-5 transform -rotate-2 skew-x-2 shadow-[10px_10px_0px_#E60012] group">
+                        <!-- Top Status Bar -->
+                        <div class="flex justify-between items-center border-b-2 border-white pb-2.5 mb-4">
+                            <span class="font-anton text-lg tracking-widest text-p5red flex items-center gap-2">
+                                <span class="w-2.5 h-2.5 bg-p5red inline-block animate-ping"></span>
+                                PROFILE // IDLE
+                            </span>
+                            <span class="bg-white text-p5dark font-anton px-2.5 py-0.5 text-xs tracking-wider">Amogus // LV.19</span>
+                        </div>
+
+                        <!-- Profile Portrait Container -->
+                        <div class="relative overflow-hidden border-4 border-p5red bg-black h-60 sm:h-72 flex items-center justify-center">
+                            <Image 
+                                src={profileImage}
+                                alt="Kaysan Rafi Akbar portrait"
+                                width={600}
+                                height={720}
+                                loading="eager"
+                                class="w-full h-full object-cover object-[50%_5%] grayscale contrast-125 brightness-95 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+                            />
+                            
+                            <!-- Halftone & Red Gradient Overlay -->
+                            <div class="absolute inset-0 halftone-red opacity-40 pointer-events-none"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-p5dark via-transparent to-transparent opacity-80 pointer-events-none"></div>
+                        </div>
+
+                        <div class="absolute -bottom-4 -right-3 ransom-box pointer-events-none px-3.5 py-1 text-sm shadow-[4px_4px_0px_#000]">
+                            ★ TAKE YOUR TIME!
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const roles = [
+            'NARRATIVE DESIGNER',
+            'UI/UX DESIGNER',
+            'QA TESTER',
+            'MEDIA EDITOR'
+        ];
+        const typewriterEl = document.getElementById('role-typewriter');
+        if (!typewriterEl) return;
+
+        let roleIndex = 0;
+        let charIndex = roles[0].length;
+        let isDeleting = false;
+
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        if (!prefersReducedMotion) {
+            function typeRoleLoop() {
+                const currentRole = roles[roleIndex];
+
+                if (isDeleting) {
+                    charIndex--;
+                    typewriterEl!.textContent = currentRole.substring(0, charIndex);
+                } else {
+                    charIndex++;
+                    typewriterEl!.textContent = currentRole.substring(0, charIndex);
+                }
+
+                let typeSpeed = isDeleting ? 35 : 70;
+
+                if (!isDeleting && charIndex === currentRole.length) {
+                    typeSpeed = 2000;
+                    isDeleting = true;
+                } else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                    typeSpeed = 300;
+                }
+
+                setTimeout(typeRoleLoop, typeSpeed);
+            }
+
+            setTimeout(() => {
+                isDeleting = true;
+                typeRoleLoop();
+            }, 2200);
+        }
+    });
+</script>
